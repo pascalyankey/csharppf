@@ -31,7 +31,10 @@ namespace CSharpPFOefenmap
             //IBANRekeningNummerGenerator();
 
             //Controle IBAN rekeningnummer
-            IBANRekeningNummerControle();
+            //IBANRekeningNummerControle();
+
+            //Codeerprogramma
+            CodeerProgramma();
 
         }
 
@@ -232,6 +235,30 @@ namespace CSharpPFOefenmap
             {
                 Console.WriteLine("Ongeldig IBAN rekeningnummer!");
             }
+        }
+
+        private static void CodeerProgramma()
+        {
+            char[] alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+            char[] sleutel = "QSPATVXBCRJYEDUOHZGIFLNWKM".ToCharArray();
+
+            Console.WriteLine("Voer een tekst in");
+            string tekst = Console.ReadLine();
+
+            tekst = tekst.ToUpper();
+
+            char[] omgezet = new char[tekst.Length];
+
+            for (int i = 0; i < tekst.Length; i++)
+            {
+                int index = Array.IndexOf(alfabet, tekst[i]);
+                if (index > -1) {
+                    omgezet[i] = sleutel[index];
+                } else {
+                    omgezet[i] = tekst[i];
+                }
+            }
+            Console.WriteLine(omgezet);
         }
     }
 }
