@@ -216,9 +216,22 @@ namespace CSharpPFOefenmap
             string reknr = "BE73 0631 5475 6360";
             reknr = reknr.Replace(" ","");
             string landcode = reknr[0] + "" + reknr[1] + "" + reknr[2] + "" + reknr[3];
+            string reknr2 = reknr.Substring(4, reknr.Length - 4);
+            reknr2 = reknr + "" + landcode;
+            int letterCijfer = (int)landcode[0] - 55;
+            int letterCijfer2 = (int)landcode[1] - 55;
+            string landcode2 = (letterCijfer + "" + letterCijfer2 + "" + landcode[2] + landcode[3]).ToString();
             reknr = reknr.Substring(4, reknr.Length - 4);
-            reknr = reknr + "" + landcode;
-            Console.WriteLine(reknr);
+            string reknr3 = reknr + landcode2;
+            long reknummer = long.Parse(reknr3);
+            long res = reknummer % 97;
+            if (res == 1)
+            {
+                Console.WriteLine("Geldig IBAN rekeningnummer");
+            } else
+            {
+                Console.WriteLine("Ongeldig IBAN rekeningnummer!");
+            }
         }
     }
 }
