@@ -6,13 +6,62 @@ using System.Threading.Tasks;
 
 namespace CSharpPFCursus
 {
-    public class Werknemer
+    public abstract partial class Werknemer : IKost
     {
-        /*
+        private WerkRegime regimeValue;
+        public WerkRegime Regime
+        {
+            get
+            {
+                return regimeValue;
+            }
+            set
+            {
+                regimeValue = value;
+            }
+        }
+
+        private Afdeling afdelingValue;
+        public Afdeling Afdeling
+        {
+            get
+            {
+                return afdelingValue;
+            }
+            set
+            {
+                afdelingValue = value;
+            }
+        }
+
+        public abstract decimal Premie
+        {
+            get;
+        }
+
+        static Werknemer()
+        {
+            Personeelsfeest = new DateTime(DateTime.Today.Year, 2, 1);
+            while (Personeelsfeest.DayOfWeek != DayOfWeek.Friday)
+                Personeelsfeest = Personeelsfeest.AddDays(1);
+        }
+        private static DateTime personeelsfeestValue;
+        public static DateTime Personeelsfeest
+        {
+            set
+            {
+                personeelsfeestValue = value;
+            }
+            get
+            {
+                return personeelsfeestValue;
+            }
+        }
+        
         public Werknemer(): this("Onbekend", DateTime.Today, Geslacht.Man)
         {
         }
-        */
+        
         public Werknemer (string naam, DateTime inDienst, Geslacht geslacht)
         {
             this.Naam = naam;
@@ -36,7 +85,6 @@ namespace CSharpPFCursus
             }
         }
         private DateTime inDienstValue;
-
         public DateTime InDienst
         {
             get { return inDienstValue; }
@@ -44,7 +92,6 @@ namespace CSharpPFCursus
         }
 
         private Geslacht geslachtValue;
-
         public Geslacht Geslacht
         {
             get
@@ -58,7 +105,6 @@ namespace CSharpPFCursus
         }
 
         private decimal salarisValue;
-
         public decimal Salaris
         {
             get
@@ -82,11 +128,50 @@ namespace CSharpPFCursus
             }
         }
 
-        public void Afbeelden()
+        public abstract decimal Bedrag
+        {
+            get;
+        }
+
+        public bool Menselijk
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public virtual void Afbeelden()
         {
             Console.WriteLine("Naam: {0}", Naam);
             Console.WriteLine("Geslacht: {0}", Geslacht);
             Console.WriteLine("In dienst: {0}", InDienst);
+            Console.WriteLine("Personeelsfeest: {0}", Personeelsfeest);
+            if (Afdeling != null)
+            {
+                Console.WriteLine(Afdeling);
+            }
+        }
+
+        public override string ToString()
+        {
+            return Naam + ' ' + Geslacht;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Werknemer)
+            {
+                Werknemer deAndere = (Werknemer)obj;
+                return this.Naam == deAndere.Naam;
+            }
+            else
+                return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Naam.GetHashCode();
         }
     }
 }

@@ -34,8 +34,26 @@ namespace CSharpPFOefenmap
             //IBANRekeningNummerControle();
 
             //Codeerprogramma
-            CodeerProgramma();
+            //CodeerProgramma();
 
+            //Bank
+            Klant klant = new Klant("Pascal", "Yankey");
+
+            Rekening[] rekeningen = new Rekening[2];
+            rekeningen[0] = new Spaarrekening("BE33 0358 9737 6646", 900, new DateTime(2018, 11, 4), klant, 5.4f);
+            rekeningen[1] = new Zichtrekening("BE74 0016 1883 3707", 500, new DateTime(2018, 10, 4), klant, -2500);
+            foreach (Rekening eenRekening in rekeningen)
+                eenRekening.Afbeelden();
+
+            //Voertuigen
+            /*Voertuig[] voertuigen = new Voertuig[2];
+            voertuigen[0] = new Vrachtwagen("Pascal Yankey", "1-BPU-729", 13700, 69, 6.5f);
+            voertuigen[1] = new Personenwagen("Pascal Yankey", "1-BPU-729", 13700, 69, 6.5f);
+            foreach (Voertuig eenVoertuig in voertuigen)
+            {
+                eenVoertuig.Afbeelden();
+                Console.WriteLine(eenVoertuig.GetKyotoScore());
+            }*/
         }
 
         private static void ConvertCelsiusFahrenheit()

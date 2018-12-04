@@ -43,8 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISpaarmiddel.cs" />
+    <Compile Include="Klant.cs" />
+    <Compile Include="Personenwagen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rekening.cs" />
+    <Compile Include="Spaarrekening.cs" />
+    <Compile Include="Voertuig.cs" />
+    <Compile Include="Vrachtwagen.cs" />
+    <Compile Include="Zichtrekening.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

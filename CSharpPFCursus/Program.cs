@@ -14,43 +14,34 @@ namespace CSharpPFCursus
     {
         static void Main(string[] args)
         {
-            /*Werknemer ik = new Werknemer();
-            ik.Naam = "Pascal";
-            ik.Geslacht = Geslacht.Man;
-            ik.InDienst = new DateTime(2018,11,16);
-            Werknemer jij = new Werknemer();
-            jij.Naam = "Jozef";
-            jij.Geslacht = Geslacht.Man;
-            jij.InDienst = new DateTime(2018, 11, 28);
-            LijnenTrekker lijnenTrekker = new LijnenTrekker();
-            ik.Afbeelden();
-            lijnenTrekker.TrekLijn(30, '-');
-            jij.Afbeelden();
-            lijnenTrekker.TrekLijn(79, '=');
-            lijnenTrekker.TrekLijn();
-            lijnenTrekker.TrekLijn(10);
-            lijnenTrekker.TrekLijn(teken: '*', lengte: 10);
+            /*Afdeling afdeling1 = new Afdeling("Strijd", 0);
+            Afdeling afdeling2 = new Afdeling("Feest", 1);
 
-            int eerste = 10, tweede = 20;
-            Verwisselaar verwisselaar = new Verwisselaar();
-            verwisselaar.VerwisselNaarAndereVariabelen(eerste, tweede, out int resultaat1, out int resultaat2);
-            Console.WriteLine(resultaat1);
-            Console.WriteLine(resultaat2);
+            Werknemer[] wij = new Werknemer[3];
+            wij[0] = new Arbeider("Asterix", new DateTime(2018, 1, 1), Geslacht.Man, 24.79m, 3);
+            wij[0].Afdeling = afdeling1;
+            wij[1] = new Bediende("Obelix", new DateTime(1995, 2, 1), Geslacht.Man, 2400.79m);
+            wij[1].Afdeling = afdeling1;
+            wij[2] = new Manager("Idefix", new DateTime(1996, 3, 1), Geslacht.Man, 2400.79m, 7000m);
+            wij[2].Afdeling = afdeling2;
+            foreach (Werknemer eenWerknemer in wij)
+                eenWerknemer.Afbeelden();*/
 
-            Omzetter omzetter = new Omzetter();
-            Console.Write("Afstand in cm: ");
-            double cm = double.Parse(Console.ReadLine());
-            Console.WriteLine($"{omzetter.CmNaarInch(cm)} inches");
-            LijnenTrekker lijnenTrekker = new LijnenTrekker();
-            lijnenTrekker.TrekLijn();
-            Console.Write("Afstand in inches: ");
-            double inches = double.Parse(Console.ReadLine());
-            Console.WriteLine($"{omzetter.InchNaarCm(inches)} cm");*/
+            IKost[] kosten = new IKost[4];
+            
+            kosten[0] = new Arbeider("Asterix", new DateTime(2018, 1, 1), Geslacht.Man, 24.79m, 3);
+            kosten[1] = new Bediende("Obelix", new DateTime(1995, 2, 1), Geslacht.Man, 2400.79m);
+            kosten[2] = new Manager("Idefix", new DateTime(1996, 3, 1), Geslacht.Man, 2400.79m, 7000m);
+            kosten[3] = new Fotokopiemachine("123", 500, 0.025m);
 
-            Werknemer ik = new Werknemer("Pascal", new DateTime(2018, 11, 7), Geslacht.Man);
-            ik.Afbeelden();
-            Werknemer jij = new Werknemer();
-            jij.Afbeelden();
+            decimal totaleKost = 0m;
+            foreach(IKost kost in kosten)
+            {
+                Console.WriteLine(kost.Menselijk);
+                Console.WriteLine(kost.Bedrag);
+                totaleKost += kost.Bedrag;
+            }
+            Console.WriteLine(totaleKost);
         }
     }
 }
