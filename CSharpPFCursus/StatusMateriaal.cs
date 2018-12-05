@@ -4,10 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharpPFOefenmap
+namespace Firma.Materiaal
 {
-    public interface ISpaarmiddel
+    enum Status
     {
-        void Afbeelden();
+        Werkend,
+        Defect
+    }
+
+    class StatusMateriaal
+    {
+        
     }
 }

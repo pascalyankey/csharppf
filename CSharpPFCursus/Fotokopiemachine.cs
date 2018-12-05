@@ -4,14 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharpPFCursus
+namespace Firma.Materiaal
 {
+    public delegate void Onderhoudsbeurt(Fotokopiemachine machine);
     public class Fotokopiemachine : IKost
     {
-        private string serieNrValue;
+        public event Onderhoudsbeurt OnderhoudNodig;
+        private const int AantalBlzTussen2OnderhoudsBeurten = 10;
         private int aantalGekopieerdeBlzValue;
         private decimal kostPerBlzValue;
 
+        public void Fotokopieer(int aantalBlz)
+        {
+            for (int blz = 1; blz <= aantalBlz; blz++)
+            {
+                Console.WriteLine($"FotokopieMachine {SerieNr} kopieert " + $"blz. {blz} van {aantalBlz}");
+                if (++AantalGekopieerdeBlz % AantalBlzTussen2OnderhoudsBeurten == 0)
+                    if (OnderhoudNodig != null)
+                        OnderhoudNodig(this);
+            }
+        }
+
+        private string serieNrValue;
         public string SerieNr
         {
             get

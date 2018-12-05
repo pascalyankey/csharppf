@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharpPFCursus
+namespace Firma.Personeel
 {
     public class Bediende : Werknemer
     {
+        public void DoeOnderhoud(Firma.Materiaal.Fotokopiemachine machine)
+        {
+            Console.WriteLine($"{Naam} onderhoudt machine {machine.SerieNr}");
+        }
+
         public Bediende(string naam, DateTime indienst, Geslacht geslacht, decimal wedde):base(naam, indienst, geslacht)
         {
             Wedde = wedde;

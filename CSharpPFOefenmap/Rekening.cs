@@ -6,23 +6,16 @@ using System.Threading.Tasks;
 
 namespace CSharpPFOefenmap
 {
-
-    public abstract class Rekening
+    public delegate void Transactie(Rekening rekening);
+    public abstract class Rekening : ISpaarmiddel
     {
-        private Klant klantValue;
-        public Klant Klant
-        {
-            get
-            {
-                return klantValue;
-            }
-            set
-            {
-                klantValue = value;
-            }
-        }
+        public event Transactie RekeningUittreksel;
+        public event Transactie SaldoInHetRood;
 
-        private decimal Saldo;
+        private decimal saldoValue;
+        private decimal vorigsaldoValue;
+        private decimal bedragValue;
+
         public Rekening(string rekeningnummer, decimal bedrag, DateTime creatiedatum, Klant klant)
         {
             this.Rekeningnummer = rekeningnummer;
@@ -75,17 +68,80 @@ namespace CSharpPFOefenmap
             }
         }
 
+        private Klant klantValue;
+        public Klant Klant
+        {
+            get
+            {
+                return klantValue;
+            }
+            set
+            {
+                klantValue = value;
+            }
+        }
+
+        public void Storten(decimal bedrag)
+        {
+            bedragValue = bedrag;
+            vorigsaldoValue = saldoValue;
+            saldoValue += bedrag;
+            if (RekeningUittreksel != null)
+                RekeningUittreksel(this);
+        }
+
+        public void Afhalen(decimal bedrag)
+        {
+            bedragValue = bedrag;
+            vorigsaldoValue = saldoValue;
+            
+            if (bedrag > saldoValue)
+            {
+                if (SaldoInHetRood != null)
+                {
+                    SaldoInHetRood(this);
+                }
+            } else
+            {
+                saldoValue -= bedrag;
+                RekeningUittreksel(this);
+            }
+        }
+
+        public decimal VorigSaldo
+        {
+            get
+            {
+                return vorigsaldoValue;
+            }
+        }
+
+        public decimal Bedrag
+        {
+            get
+            {
+                return bedragValue;
+            }
+        }
+
+        public decimal Saldo
+        {
+            get
+            {
+                return saldoValue;
+            }
+            set
+            {
+                saldoValue = value;
+            }
+        }
+
         public virtual void Afbeelden()
         {
             Console.WriteLine("Rekeningnummer: {0}", Rekeningnummer);
             Console.WriteLine("Saldo: {0}", Saldo);
             Console.WriteLine("Creatiedatum: {0}", Creatiedatum);
             Klant.Afbeelden();
-        }
-
-        public void Storten(decimal bedrag)
-        {
-            Saldo += bedrag;
         }
     }
 }

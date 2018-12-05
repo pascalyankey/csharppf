@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CSharpPFOefenmap
 {
-    public interface ISpaarmiddel
+    interface IVervuiler
     {
-        void Afbeelden();
+        double GeefVervuiling();
     }
 }

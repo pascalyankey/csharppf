@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharpPFOefenmap
 {
-    public abstract class Voertuig
+    public abstract class Voertuig : IVervuiler, IPrivaat, IMilieu
     {
         private string Polishouder;
         private string Nummerplaat;
@@ -78,5 +78,17 @@ namespace CSharpPFOefenmap
         }
 
         public abstract double GetKyotoScore();
+
+        public abstract double GeefVervuiling();
+
+        public string GeefPrivateData()
+        {
+            return Polishouder + " " + Nummerplaat;
+        }
+
+        public string GeefMilieuData()
+        {
+            return Pk + " " + Kostprijs + " " + GemiddeldVerbruik;
+        }
     }
 }

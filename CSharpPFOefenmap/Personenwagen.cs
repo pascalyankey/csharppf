@@ -58,5 +58,9 @@ namespace CSharpPFOefenmap
             return GemiddeldVerbruik * Pk / AantalPassagiers;
         }
 
+        public override double GeefVervuiling()
+        {
+            return GetKyotoScore() * 5;
+        }
     }
 }

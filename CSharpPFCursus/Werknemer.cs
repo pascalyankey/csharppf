@@ -1,13 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Firma.Personeel;
 
-namespace CSharpPFCursus
+namespace Firma.Personeel
 {
     public abstract partial class Werknemer : IKost
     {
+        public Werknemer() : this("Onbekend", DateTime.Today, Geslacht.Man)
+        {
+        }
+
+        public Werknemer(string naam, DateTime inDienst, Geslacht geslacht)
+        {
+            this.Naam = naam;
+            this.InDienst = inDienst;
+            this.Geslacht = geslacht;
+        }
+
+        public static void UitgebreideWerknemersLijst(Werknemer[] werknemers)
+        {
+            Console.WriteLine("Uitgebreide werknemerslijst:");
+            foreach (Werknemer werknemer in werknemers)
+                werknemer.Afbeelden();
+        }
+
+        public static void KorteWerknemersLijst(Werknemer[] werknemers)
+        {
+            Console.WriteLine("Verkorte werknemerslijst:");
+            foreach (Werknemer werknemer in werknemers)
+                Console.WriteLine(werknemer.ToString());
+        }
+
         private WerkRegime regimeValue;
         public WerkRegime Regime
         {
@@ -18,6 +40,32 @@ namespace CSharpPFCursus
             set
             {
                 regimeValue = value;
+            }
+        }
+
+        private DateTime[] verlofdagenValue;
+        public DateTime[] Verlofdagen
+        {
+            get
+            {
+                return verlofdagenValue;
+            }
+            set
+            {
+                verlofdagenValue = value;
+            }
+        }
+
+        private DateTime[] ziektedagenValue;
+        public DateTime[] Ziektedagen
+        {
+            get
+            {
+                return ziektedagenValue;
+            }
+            set
+            {
+                ziektedagenValue = value;
             }
         }
 
@@ -56,17 +104,6 @@ namespace CSharpPFCursus
             {
                 return personeelsfeestValue;
             }
-        }
-        
-        public Werknemer(): this("Onbekend", DateTime.Today, Geslacht.Man)
-        {
-        }
-        
-        public Werknemer (string naam, DateTime inDienst, Geslacht geslacht)
-        {
-            this.Naam = naam;
-            this.InDienst = inDienst;
-            this.Geslacht = geslacht;
         }
 
         private string naamValue;

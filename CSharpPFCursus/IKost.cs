@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharpPFCursus
+namespace Firma
 {
-    interface IKost
+    public interface IKost
     {
         decimal Bedrag
         {

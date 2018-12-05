@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CSharpPFOefenmap
 {
-    public interface ISpaarmiddel
+    interface IMilieu
     {
-        void Afbeelden();
+        string GeefMilieuData();
     }
 }

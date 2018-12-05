@@ -39,5 +39,10 @@ namespace CSharpPFOefenmap
         {
             return GemiddeldVerbruik * Pk / MaximumLading;
         }
+
+        public override double GeefVervuiling()
+        {
+            return GetKyotoScore() * 20;
+        }
     }
 }
