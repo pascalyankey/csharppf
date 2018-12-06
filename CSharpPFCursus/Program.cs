@@ -1,6 +1,7 @@
 ﻿using System;
 using Firma.Personeel;
 using Firma.Materiaal;
+using System.IO;
 
 namespace CSharpPFCursus
 {
@@ -23,7 +24,7 @@ namespace CSharpPFCursus
                     totaal += werknemer.Bedrag;
                 Console.WriteLine($"Totale kost is {totaal}");
             };
-            rapport(wij);*/
+            rapport(wij);
 
             Fotokopiemachine machine = new Fotokopiemachine("123", 0, 2.0m);
             Bediende eenBediende = new Bediende("Asterix", DateTime.Today, Geslacht.Man, 2400.79m);
@@ -34,7 +35,20 @@ namespace CSharpPFCursus
             };
 
             machine.OnderhoudNodig += eenBediende.DoeOnderhoud;
-            machine.Fotokopieer(49);
+            machine.Fotokopieer(49);*/
+
+            Console.Write("Provincie: ");
+            string provincie = Console.ReadLine();
+            try
+            {
+                ProvincieInfo info = new ProvincieInfo();
+                Console.WriteLine(info.ProvincieGrootte(provincie));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Omzetter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvincieInfo.cs" />
     <Compile Include="StatusMateriaal.cs" />
     <Compile Include="StatusPersoneel.cs" />
     <Compile Include="Verwisselaar.cs" />

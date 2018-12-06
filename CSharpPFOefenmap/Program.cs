@@ -46,6 +46,10 @@ namespace CSharpPFOefenmap
             zichtrekening.SaldoInHetRood += eenBankBediende.ToonSaldoInHetRood;
             zichtrekening.Storten(100);
             zichtrekening.Afhalen(100);
+            spaarrekening.RekeningUittreksel += eenBankBediende.ToonRekeningUittreksel;
+            spaarrekening.SaldoInHetRood += eenBankBediende.ToonSaldoInHetRood;
+            spaarrekening.Storten(100);
+            spaarrekening.Afhalen(1100);
 
             //Voertuigen
             /*IPrivaat[] privaten = new IPrivaat[2];

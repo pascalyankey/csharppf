@@ -9,6 +9,48 @@ namespace Firma.Materiaal
     public delegate void Onderhoudsbeurt(Fotokopiemachine machine);
     public class Fotokopiemachine : IKost
     {
+        public class KostPerBlzException : Exception
+        {
+            private decimal verkeerdeKostValue;
+            public decimal VerkeerdeKost
+            {
+                get
+                {
+                    return verkeerdeKostValue;
+                }
+                set
+                {
+                    verkeerdeKostValue = value;
+                }
+            }
+
+            public KostPerBlzException(string message, decimal verkeerdeKost) : base(message)
+            {
+                VerkeerdeKost = verkeerdeKost;
+            }
+        }
+
+        public class AantalGekopieerdBlzException : Exception
+        {
+            private int verkeerdAantalBlzValue;
+            public int VerkeerdAantalBlz
+            {
+                get
+                {
+                    return verkeerdAantalBlzValue;
+                }
+                set
+                {
+                    verkeerdAantalBlzValue = value;
+                }
+            }
+
+            public AantalGekopieerdBlzException(string message, int verkeerdAantalBlz) : base(message)
+            {
+                VerkeerdAantalBlz = verkeerdAantalBlz;
+            }
+        }
+
         public event Onderhoudsbeurt OnderhoudNodig;
         private const int AantalBlzTussen2OnderhoudsBeurten = 10;
         private int aantalGekopieerdeBlzValue;
@@ -46,8 +88,9 @@ namespace Firma.Materiaal
             }
             set
             {
-                if (value >= 0)
-                    aantalGekopieerdeBlzValue = value;
+                if (value < 0)
+                    throw new AantalGekopieerdBlzException("Aantal blz. < 0!", value);
+                aantalGekopieerdeBlzValue = value;
             }
         }
 
@@ -59,8 +102,9 @@ namespace Firma.Materiaal
             }
             set
             {
-                if (value > 0)
-                    kostPerBlzValue = value;
+                if (value <= 0)
+                    throw new KostPerBlzException("Kost per blz. <= 0!", value);
+                kostPerBlzValue = value;
             }
         }
 

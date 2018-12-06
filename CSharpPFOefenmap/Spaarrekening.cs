@@ -8,6 +8,27 @@ namespace CSharpPFOefenmap
 {
     public class Spaarrekening : Rekening
     {
+        public class OngeldigIntrestException : Exception
+        {
+            private float ongeldigIntrestValue;
+            public float OngeldigIntrest
+            {
+                get
+                {
+                    return ongeldigIntrestValue;
+                }
+                set
+                {
+                    ongeldigIntrestValue = value;
+                }
+            }
+
+            public OngeldigIntrestException(string message, float ongeldigIntrest) : base(message)
+            {
+                OngeldigIntrest = ongeldigIntrest;
+            }
+        }
+
         public Spaarrekening(string rekeningnummer, decimal bedrag, DateTime creatiedatum, Klant klant, float intrest) : base(rekeningnummer, bedrag, creatiedatum, klant)
         {
             Intrest = intrest;
@@ -22,10 +43,9 @@ namespace CSharpPFOefenmap
             }
             set
             {
-                if (value >= 0)
-                {
-                    intrestValue = value;
-                }
+                if (value < 0)
+                    throw new OngeldigIntrestException("Intrest mag niet negatief zijn!", value);
+                intrestValue = value;
             }
         }
 

@@ -9,6 +9,48 @@ namespace CSharpPFOefenmap
     public delegate void Transactie(Rekening rekening);
     public abstract class Rekening : ISpaarmiddel
     {
+        public class OngeldigRekeningnummerException : Exception
+        {
+            private string ongeldigRekeningnummerValue;
+            public string OngeldigRekeningnummer
+            {
+                get
+                {
+                    return ongeldigRekeningnummerValue;
+                }
+                set
+                {
+                    ongeldigRekeningnummerValue = value;
+                }
+            }
+
+            public OngeldigRekeningnummerException(string message, string ongeldigRekeningnummer) : base(message)
+            {
+                OngeldigRekeningnummer = ongeldigRekeningnummer;
+            }
+        }
+
+        public class OngeldigeCreatieDatumException : Exception
+        {
+            private DateTime ongeldigeCreatieDatumValue;
+            public DateTime OngeldigeCreatieDatum
+            {
+                get
+                {
+                    return ongeldigeCreatieDatumValue;
+                }
+                set
+                {
+                    ongeldigeCreatieDatumValue = value;
+                }
+            }
+
+            public OngeldigeCreatieDatumException(string message, DateTime ongeldigeCreatieDatum) : base(message)
+            {
+                OngeldigeCreatieDatum = ongeldigeCreatieDatum;
+            }
+        }
+
         public event Transactie RekeningUittreksel;
         public event Transactie SaldoInHetRood;
 
@@ -45,10 +87,9 @@ namespace CSharpPFOefenmap
                 string reknr3 = reknr + landcode2;
                 long reknummer = long.Parse(reknr3);
                 long res = reknummer % 97;
-                if (res == 1)
-                {
-                    rekeningnummerValue = value;
-                }
+                if (res != 1)
+                    throw new OngeldigRekeningnummerException("Ongeldig rekeningnummer!", value);
+                rekeningnummerValue = value;
             }
         }
 
@@ -61,10 +102,9 @@ namespace CSharpPFOefenmap
             }
             set
             {
-                if (value.Year > 1900)
-                {
-                    creatiedatumValue = value;
-                }
+                if (value.Year < 1990)
+                    throw new OngeldigeCreatieDatumException("Het jaar mag niet voor 1900 zijn!", value);
+                creatiedatumValue = value;
             }
         }
 
