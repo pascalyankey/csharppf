@@ -2,53 +2,43 @@
 using Firma.Personeel;
 using Firma.Materiaal;
 using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CSharpPFCursus
 {
     class Program
     {
-        delegate void WerknemersLijst(Werknemer[] werknemers);
         static void Main(string[] args)
         {
-            /*Werknemer[] wij = new Werknemer[3];
-            wij[0] = new Arbeider("Asterix", new DateTime(2018, 1, 1), Geslacht.Man, 24.79m, 3);
-            wij[1] = new Bediende("Obelix", new DateTime(1995, 2, 1), Geslacht.Man, 2400.79m);
-            wij[2] = new Manager("Idefix", new DateTime(1996, 3, 1), Geslacht.Man, 2400.79m, 7000m);
-
-            WerknemersLijst rapport;
-
-            rapport = delegate (Werknemer[] werknemers)
+            List<Object> lijst = new List<Object>()
             {
-                decimal totaal = 0m;
-                foreach (Werknemer werknemer in werknemers)
-                    totaal += werknemer.Bedrag;
-                Console.WriteLine($"Totale kost is {totaal}");
+                new Arbeider("Asterix", new DateTime(2018, 1, 1), Geslacht.Man, 24.79m, 3),
+                new Bediende("Obelix", new DateTime(2018, 2, 1), Geslacht.Man, 2400.79m),
+                new Fotokopiemachine("123", 500, 0.025m),
+                null,
+                "C# 7.0"
             };
-            rapport(wij);
-
-            Fotokopiemachine machine = new Fotokopiemachine("123", 0, 2.0m);
-            Bediende eenBediende = new Bediende("Asterix", DateTime.Today, Geslacht.Man, 2400.79m);
-
-            machine.OnderhoudNodig += delegate (Fotokopiemachine apparaat)
+            foreach (var item in lijst)
             {
-                Console.WriteLine($"Onderhoud is aangevraagd voor machine" + $" {apparaat.SerieNr}.");
-            };
-
-            machine.OnderhoudNodig += eenBediende.DoeOnderhoud;
-            machine.Fotokopieer(49);*/
-
-            Console.Write("Provincie: ");
-            string provincie = Console.ReadLine();
-            try
-            {
-                ProvincieInfo info = new ProvincieInfo();
-                Console.WriteLine(info.ProvincieGrootte(provincie));
+                ToonGegevens(item);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+        }
 
+        private static void ToonGegevens(Object obj)
+        {
+            if (obj is Werknemer w)
+            {
+                Console.WriteLine($"Werknemer {w.Naam} kost {w.Bedrag} euro");
+            }
+            else if (obj is Fotokopiemachine f)
+            {
+                Console.WriteLine($"Fotokopiemachine {f.SerieNr} kopieerde" + $" {f.AantalGekopieerdeBlz} en kost {f.Bedrag} euro");
+            }
+            else
+            {
+                Console.WriteLine("onbekend type");
+            }
         }
     }
 }

@@ -49,12 +49,14 @@
     <Compile Include="Afdeling.cs" />
     <Compile Include="Arbeider.cs" />
     <Compile Include="Bediende.cs" />
+    <Compile Include="Breuk.cs" />
     <Compile Include="Fotokopiemachine.cs" />
     <Compile Include="Geslacht.cs" />
     <Compile Include="IKost.cs" />
     <Compile Include="LijnenTrekker.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Omzetter.cs" />
+    <Compile Include="Overuren.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvincieInfo.cs" />

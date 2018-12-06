@@ -38,18 +38,15 @@ namespace CSharpPFOefenmap
 
             //Bank
             Klant klant = new Klant("Pascal", "Yankey");
-            Rekening zichtrekening = new Zichtrekening("BE74 0016 1883 3707", 500, new DateTime(2018, 10, 4), klant, -2500);
-            Rekening spaarrekening = new Spaarrekening("BE33 0358 9737 6646", 900, new DateTime(2018, 11, 4), klant, 5.4f);
-            BankBediende eenBankBediende = new BankBediende("Anke", "Bollen");
-
-            zichtrekening.RekeningUittreksel += eenBankBediende.ToonRekeningUittreksel;
-            zichtrekening.SaldoInHetRood += eenBankBediende.ToonSaldoInHetRood;
-            zichtrekening.Storten(100);
-            zichtrekening.Afhalen(100);
-            spaarrekening.RekeningUittreksel += eenBankBediende.ToonRekeningUittreksel;
-            spaarrekening.SaldoInHetRood += eenBankBediende.ToonSaldoInHetRood;
-            spaarrekening.Storten(100);
-            spaarrekening.Afhalen(1100);
+            try
+            {
+                Rekening zichtrekening = new Zichtrekening("BE74 0016 1883 3707", 500, new DateTime(2018, 10, 4), klant, -2500);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
 
             //Voertuigen
             /*IPrivaat[] privaten = new IPrivaat[2];
