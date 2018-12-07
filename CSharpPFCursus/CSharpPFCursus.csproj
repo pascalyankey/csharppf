@@ -53,10 +53,13 @@
     <Compile Include="Fotokopiemachine.cs" />
     <Compile Include="Geslacht.cs" />
     <Compile Include="IKost.cs" />
+    <Compile Include="Klant.cs" />
     <Compile Include="LijnenTrekker.cs" />
     <Compile Include="Manager.cs" />
+    <Compile Include="MyStringExtensions.cs" />
     <Compile Include="Omzetter.cs" />
     <Compile Include="Overuren.cs" />
+    <Compile Include="Persoon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvincieInfo.cs" />

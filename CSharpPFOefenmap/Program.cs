@@ -10,6 +10,7 @@ namespace CSharpPFOefenmap
     {
         const float GemLichTempCelsius = 37.0f;
         const int AantalSeconden = 3736;
+
         static void Main(string[] args)
         {
             //Conversie Celsius -> Fahrenheit
@@ -37,7 +38,7 @@ namespace CSharpPFOefenmap
             //CodeerProgramma();
 
             //Bank
-            Klant klant = new Klant("Pascal", "Yankey");
+            /*Klant klant = new Klant("Pascal", "Yankey");
             try
             {
                 Rekening zichtrekening = new Zichtrekening("BE74 0016 1883 3707", 500, new DateTime(2018, 10, 4), klant, -2500);
@@ -45,8 +46,7 @@ namespace CSharpPFOefenmap
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-            
+            }*/
 
             //Voertuigen
             /*IPrivaat[] privaten = new IPrivaat[2];
@@ -64,6 +64,76 @@ namespace CSharpPFOefenmap
 
             foreach (IMilieu milieu in milieus)
                 Console.WriteLine(milieu.GeefMilieuData());*/
+
+            //Lambda expressies
+            LambdaExpressies();
+        }
+
+        private static void LambdaExpressies()
+        {
+            Func<int, bool> EvenGetallen = getal => getal % 2 == 0;
+            Func<int, bool> OnevenGetallen = getal => getal % 2 == 1;
+            Func<int, bool> PositieveGetallen = getal => getal >= 0;
+            Func<int, bool> NegatieveGetallen = getal => getal < 0;
+            Action<int> ToonEvenGetallen = getal => Console.Write(getal + " ");
+            Action<int> ToonOnevenGetallen = getal => Console.Write(getal + " ");
+            Action<int> ToonPositieveGetallen = getal => Console.Write(getal + " ");
+            Action<int> ToonNegatieveGetallen = getal => Console.Write(getal + " ");
+
+            var getallen = new[] { -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, -12 };
+
+            Console.Write("Array: ");
+            foreach (var getal in getallen)
+                Console.Write(getal + " ");
+            Console.WriteLine();
+
+            Console.Write("Even: ");
+            foreach (var getal in getallen)
+            {
+                if (EvenGetallen(getal))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    ToonEvenGetallen(getal);
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+
+            Console.Write("Oneven: ");
+            foreach (var getal in getallen)
+            {
+                if (OnevenGetallen(getal))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    ToonOnevenGetallen(getal);
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+
+            Console.Write("Positief: ");
+            foreach (var getal in getallen)
+            {
+                if (PositieveGetallen(getal))
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    ToonPositieveGetallen(getal);
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+
+            Console.Write("Negatief: ");
+            foreach (var getal in getallen)
+            {
+                if (NegatieveGetallen(getal))
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    ToonNegatieveGetallen(getal);
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
         }
 
         private static void ConvertCelsiusFahrenheit()
