@@ -49,7 +49,10 @@
     <Compile Include="Afdeling.cs" />
     <Compile Include="Arbeider.cs" />
     <Compile Include="Bediende.cs" />
+    <Compile Include="Bier.cs" />
     <Compile Include="Breuk.cs" />
+    <Compile Include="Brouwer.cs" />
+    <Compile Include="Brouwers.cs" />
     <Compile Include="Fotokopiemachine.cs" />
     <Compile Include="Geslacht.cs" />
     <Compile Include="IKost.cs" />

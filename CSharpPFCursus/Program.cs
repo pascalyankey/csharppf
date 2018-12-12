@@ -4,23 +4,35 @@ using Firma.Materiaal;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CSharpPFCursus
 {
     class Program
     {
-        static void UitgebreideWerknemersLijst(Werknemer[] werknemers)
-        {
-            foreach (Werknemer eenWerknemer in werknemers)
-                eenWerknemer.Afbeelden();
-        }
         static void Main(string[] args)
         {
-            Werknemer[] werknemers = new Werknemer[2];
-            werknemers[0] = new Arbeider("Asterix", new DateTime(2018, 1, 1), Geslacht.Man, 24.79m, 3);
-            werknemers[1] = new Bediende("Obelix", new DateTime(2018, 1, 1), Geslacht.Man, 1500m);
-            Action<Werknemer[]> toonWerknemers = UitgebreideWerknemersLijst;
-            toonWerknemers(werknemers);
+            var personen = new[]
+            {
+                new { Naam = "Jan", AantalKinderen = 1 },
+                new { Naam = "Mieke", AantalKinderen = 2 },
+                new { Naam = "Els", AantalKinderen = 1 }
+            };
+
+            var toegangsprijzen = new[]
+            {
+                new {AantalKinderen = 1, Bedrag = 10 },
+                new {AantalKinderen = 2, Bedrag = 25 }
+            };
+
+            var toegangsPrijzenPerPersoon =
+                from persoon in personen
+                join toegangsprijs in toegangsprijzen
+                on persoon.AantalKinderen equals toegangsprijs.AantalKinderen
+                select new { persoon.Naam, toegangsprijs.Bedrag };
+
+            foreach (var persoon in toegangsPrijzenPerPersoon)
+                Console.WriteLine($"{persoon.Naam}: {persoon.Bedrag} euro");
         }
     }
 }

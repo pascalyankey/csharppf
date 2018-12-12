@@ -66,13 +66,111 @@ namespace CSharpPFOefenmap
                 Console.WriteLine(milieu.GeefMilieuData());*/
 
             //Lambda expressies
-            LambdaExpressies();
+            //LambdaExpressies();
+
+            //LINQ
+            Link();
+
+        }
+
+        private static void Link()
+        {
+            var planten = new List<Plant>
+            {
+                new Plant {PlantId = 1, Plantennaam = "Tulp", Kleur = "rood", Prijs = 0.50m, Soort = "bol"},
+                new Plant {PlantId = 2, Plantennaam = "Krokus", Kleur = "wit", Prijs = 0.20m, Soort = "bol"},
+                new Plant {PlantId = 3, Plantennaam = "Narcis", Kleur = "geel", Prijs = 0.30m, Soort = "bol"},
+                new Plant {PlantId = 4, Plantennaam = "Blauw druifje", Kleur = "blauw", Prijs = 0.20m, Soort = "bol"},
+                new Plant {PlantId = 5, Plantennaam = "Azalea", Kleur = "rood", Prijs = 3.00m, Soort = "heester"},
+                new Plant {PlantId = 6, Plantennaam = "Forsythia", Kleur = "geel", Prijs = 2.00m, Soort = "heester"},
+                new Plant {PlantId = 7, Plantennaam = "Magnolia", Kleur = "wit", Prijs = 4.00m, Soort = "heester"},
+                new Plant {PlantId = 8, Plantennaam = "Waterlelie", Kleur = "wit", Prijs = 2.00m, Soort = "water"},
+                new Plant {PlantId = 9, Plantennaam = "Lisdodde", Kleur = "geel", Prijs = 3.00m, Soort = "water"},
+                new Plant {PlantId = 10, Plantennaam = "Kalmoes", Kleur = "geel", Prijs = 2.50m, Soort = "water"},
+                new Plant {PlantId = 11, Plantennaam = "Bieslook", Kleur = "paars", Prijs = 1.50m, Soort = "kruid"},
+                new Plant {PlantId = 12, Plantennaam = "Rozemarijn", Kleur = "blauw", Prijs = 1.25m, Soort = "kruid"},
+                new Plant {PlantId = 13, Plantennaam = "Munt", Kleur = "wit", Prijs = 1.10m, Soort = "kruid"},
+                new Plant {PlantId = 14, Plantennaam = "Dragon", Kleur = "wit", Prijs = 1.30m, Soort = "kruid"},
+                new Plant {PlantId = 15, Plantennaam = "Basilicum", Kleur = "wit", Prijs = 1.50m, Soort = "kruid"}
+            };
+
+            //Toon plantennaam, kleur en prijs van de witte planten, gesorteerd op prijs
+            Console.WriteLine("=== WITTE PLANTEN ===");
+            var wittePlanten = from plant in planten where plant.Kleur == "wit" orderby plant.Prijs select plant;
+            foreach (var plant in wittePlanten)
+                Console.WriteLine($"{plant.Plantennaam} {plant.Kleur} {plant.Prijs}");
+            Console.WriteLine();
+            //Toon het aantal witte planten
+            Console.WriteLine($"Aantal witte planten: {planten.Count(plant => plant.Kleur == "wit")}");
+            Console.WriteLine();
+
+            //Bereken de gemiddelde prijs van de heesters en toon deze op het scherm
+            var heesterPlanten = from plant in planten where plant.Soort == "heester" select plant;
+            Console.WriteLine($"Gemiddelde heester prijs: {heesterPlanten.Average(plant => plant.Prijs)}");
+            Console.WriteLine();
+
+            //Toon de gemiddelde prijs en de maximumprijs van de kruiden
+            var kruidPlanten = from plant in planten where plant.Soort == "kruid" select plant;
+            Console.WriteLine($"Gemiddelde kruidplant prijs: {kruidPlanten.Average(plant => plant.Prijs)}");
+            Console.WriteLine($"Maximum kruidplant prijs: {kruidPlanten.Max(plant => plant.Prijs)}");
+            Console.WriteLine();
+
+            //Toon de plantennamen die met de letter “B” beginnen
+            Console.WriteLine("=== PLANTENNAMEN DIE BEGINNEN MET LETTER 'B' ===");
+            var letterBPlanten = from plant in planten where plant.Plantennaam.StartsWith("B") select plant;
+            foreach (var plant in letterBPlanten)
+                Console.WriteLine(plant.Plantennaam);
+            Console.WriteLine();
+
+            //Toon een lijst van de verschillende plantenkleuren op het scherm
+            Console.WriteLine("=== VERSCHILLENDE PLANTENKLEUREN ===");
+            var soortenPlantenkleur = from plant in planten group plant by plant.Kleur;
+            foreach (var soort in soortenPlantenkleur)
+                Console.WriteLine(soort.Key);
+            Console.WriteLine();
+
+            //Toon de plantennamen per kleur op het scherm
+            Console.WriteLine("=== PLANTENNAMEN PER KLEUR ===");
+            foreach (var soort in soortenPlantenkleur)
+            {
+                Console.WriteLine($"=== {soort.Key} ===");
+                foreach (var plant in soort)
+                    Console.WriteLine(plant.Plantennaam);
+            }
+            Console.WriteLine();
+
+            //Toon per soort de maximum plantenprijs van die soort
+            Console.WriteLine("=== MAXIMUM PLANTENPRIJS PER SOORT ===");
+            var soortPlantMaxPrijs = from plant in planten group plant by plant.Soort into soortPrijs select new { PlantSoort = soortPrijs.Key, MaxPrijs = soortPrijs.Max(x => x.Prijs) };
+            foreach (var soort in soortPlantMaxPrijs)
+                Console.WriteLine($"{soort.PlantSoort}: {soort.MaxPrijs}");
+            Console.WriteLine();
+
+            //Toon de soorten alfabetisch met per soort aantal planten + namen
+            Console.WriteLine("=== SOORTEN PLANTEN ALFABETISCH (+ AANTAL + NAMEN) ===");
+            var soortenPlanten = from plant in planten orderby plant.Soort group plant by plant.Soort into soortPlant select new { PlantSoort = soortPlant.Key, AantalPlanten = soortPlant.Count(), PlantNamen = soortPlant };
+            foreach (var soort in soortenPlanten)
+            {
+                Console.WriteLine($"=== {soort.AantalPlanten} {soort.PlantSoort}planten  ===");
+                foreach (var plant in soort.PlantNamen)
+                    Console.WriteLine(plant.Plantennaam);
+            }
+            Console.WriteLine();
+
+            //Toon de namen van de planten gegroepeerd per soort en binnen de soort per kleur
+            Console.WriteLine("=== PLANTENNAMEN PER SOORT (> PER KLEUR) ===");
+            var soortPlantSoortKleur = from plant in planten group plant by plant.Soort into soortPlant select new { SoortPlant = soortPlant.Key, SoortKleur = soortPlant.GroupBy(x => x.Kleur) };
+            foreach(var soort in soortPlantSoortKleur)
+            {
+                Console.WriteLine($"=== {soort.SoortPlant} ===");
+                Console.WriteLine($"=== {soort.SoortKleur} ===");
+            }
         }
 
         private static void LambdaExpressies()
         {
             Func<int, bool> EvenGetallen = getal => getal % 2 == 0;
-            Func<int, bool> OnevenGetallen = getal => getal % 2 == 1;
+            Func<int, bool> OnevenGetallen = getal => getal % 2 == 1 || getal % 2 == -1;
             Func<int, bool> PositieveGetallen = getal => getal >= 0;
             Func<int, bool> NegatieveGetallen = getal => getal < 0;
             Action<int> ToonEvenGetallen = getal => Console.Write(getal + " ");
@@ -80,7 +178,7 @@ namespace CSharpPFOefenmap
             Action<int> ToonPositieveGetallen = getal => Console.Write(getal + " ");
             Action<int> ToonNegatieveGetallen = getal => Console.Write(getal + " ");
 
-            var getallen = new[] { -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, -12 };
+            var getallen = new[] { -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, -12 };
 
             Console.Write("Array: ");
             foreach (var getal in getallen)
