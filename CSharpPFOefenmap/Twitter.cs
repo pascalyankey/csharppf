@@ -11,11 +11,11 @@ namespace CSharpPFOefenmap
 {
     public class Twitter
     {
-        string bestandsnaam = @"C:\Data\twitter.obj";
+        readonly string bestandsnaam = @"C:\Data\twitter.obj";
         public void PostTweet(Tweet tweet)
         {
             Tweets tweets = new Tweets();
-            tweets.AddTweet(tweet);
+            tweets.Berichten.Add(tweet);
 
             try
             {
@@ -41,15 +41,15 @@ namespace CSharpPFOefenmap
             }
         }
         
-        public void ShowTweets(Tweets tweets)
+        public void ShowTweets()
         {
             try
             {
                 using (var bestand = File.Open(bestandsnaam, FileMode.Open, FileAccess.Read))
                 {
                     var lezer = new BinaryFormatter();
-                    tweets = (Tweets)lezer.Deserialize(bestand);
-                    foreach (var tweet in tweets.Berichten)
+                    var tweets = (List<Tweet>)lezer.Deserialize(bestand);
+                    foreach (var tweet in tweets)
                     {
                         Console.WriteLine(tweet.ToString());
                     }
