@@ -159,11 +159,16 @@ namespace CSharpPFOefenmap
 
             //Toon de namen van de planten gegroepeerd per soort en binnen de soort per kleur
             Console.WriteLine("=== PLANTENNAMEN PER SOORT (> PER KLEUR) ===");
-            var soortPlantSoortKleur = from plant in planten group plant by plant.Soort into soortPlant select new { SoortPlant = soortPlant.Key, SoortKleur = soortPlant.GroupBy(x => x.Kleur) };
+            var soortPlantSoortKleur = from plant in planten group plant by plant.Soort into soortPlant select new { SoortPlant = soortPlant.Key, SoortKleur = from plant2 in soortPlant group plant2 by plant2.Kleur into soortKleur select new { SoortKleur2 = soortKleur.Key, PlantNamen = from plant3 in soortKleur select plant3.Plantennaam } };
             foreach(var soort in soortPlantSoortKleur)
             {
-                Console.WriteLine($"=== {soort.SoortPlant} ===");
-                Console.WriteLine($"=== {soort.SoortKleur} ===");
+                Console.WriteLine($"### {soort.SoortPlant.ToUpper()} ###");
+                foreach (var soortKleur in soort.SoortKleur)
+                {
+                    Console.WriteLine($"--- {soortKleur.SoortKleur2} ---");
+                    foreach (var plantnaam in soortKleur.PlantNamen)
+                        Console.WriteLine(plantnaam);
+                }
             }
         }
 

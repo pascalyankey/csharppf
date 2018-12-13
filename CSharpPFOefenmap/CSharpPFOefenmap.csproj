@@ -60,6 +60,9 @@
     <Compile Include="Rekening.cs" />
     <Compile Include="Spaarrekening.cs" />
     <Compile Include="Stookketel.cs" />
+    <Compile Include="Tweet.cs" />
+    <Compile Include="Tweets.cs" />
+    <Compile Include="Twitter.cs" />
     <Compile Include="Voertuig.cs" />
     <Compile Include="Vrachtwagen.cs" />
     <Compile Include="Zichtrekening.cs" />
