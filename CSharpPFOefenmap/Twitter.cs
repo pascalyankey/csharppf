@@ -41,16 +41,15 @@ namespace CSharpPFOefenmap
             }
         }
         
-        public void ShowTweets()
+        public void ShowTweets(Tweets tweets)
         {
-            List<Tweet> tweets = new List<Tweet>();
             try
             {
                 using (var bestand = File.Open(bestandsnaam, FileMode.Open, FileAccess.Read))
                 {
                     var lezer = new BinaryFormatter();
-                    tweets = (List<Tweet>)lezer.Deserialize(bestand);
-                    foreach (var tweet in tweets)
+                    tweets = (Tweets)lezer.Deserialize(bestand);
+                    foreach (var tweet in tweets.Berichten)
                     {
                         Console.WriteLine(tweet.ToString());
                     }
