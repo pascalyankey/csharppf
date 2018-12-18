@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpPFCursus", "CSharpPFC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpPFOefenmap", "CSharpPFOefenmap\CSharpPFOefenmap.csproj", "{3E658B4E-C892-4BA2-8550-40712620543E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PastaPizzaNET", "PastaPizzaNET\PastaPizzaNET.csproj", "{967ED6F3-A3CD-4716-B5B3-D531AABE2972}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3E658B4E-C892-4BA2-8550-40712620543E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E658B4E-C892-4BA2-8550-40712620543E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E658B4E-C892-4BA2-8550-40712620543E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967ED6F3-A3CD-4716-B5B3-D531AABE2972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967ED6F3-A3CD-4716-B5B3-D531AABE2972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967ED6F3-A3CD-4716-B5B3-D531AABE2972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967ED6F3-A3CD-4716-B5B3-D531AABE2972}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
