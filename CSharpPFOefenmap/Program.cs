@@ -69,8 +69,49 @@ namespace CSharpPFOefenmap
             //LambdaExpressies();
 
             //LINQ
-            Link();
+            //Link();
 
+            //Twitter
+            Twitter();
+
+        }
+
+        private static void Twitter()
+        {
+            char keuze;
+            string naam;
+            string bericht;
+            DateTime tijdstip;
+            var twitter = new Twitter();
+
+            Console.WriteLine("Maak een keuze:");
+            Console.WriteLine("A: Twitterbericht plaatsen");
+            Console.WriteLine("B: Toon alle twitterberichten");
+            Console.WriteLine("C: Toon twitterberichten van een specifieke persoon");
+
+            switch (keuze = Char.Parse(Console.ReadLine()))
+            {
+                case 'A':
+                    Console.Write("Gebruikersnaam: ");
+                    naam = Console.ReadLine().ToString();
+                    Console.Write("Bericht (max.: 280 tekens): ");
+                    bericht = Console.ReadLine().ToString();
+                    tijdstip = DateTime.Now;
+                    var tweet = new Tweet { Naam = naam, Bericht = bericht, Tijdstip = tijdstip };
+                    twitter.PostBericht(tweet);
+                    break;
+                case 'B':
+                    twitter.ToonBerichten();
+                    break;
+                case 'C':
+                    Console.Write("Gebruikersnaam: ");
+                    naam = Console.ReadLine().ToString();
+                    twitter.ToonBerichten(naam);
+                    break;
+                default:
+                    Console.WriteLine("Ongeldige keuze");
+                    break;
+            }
         }
 
         private static void Link()

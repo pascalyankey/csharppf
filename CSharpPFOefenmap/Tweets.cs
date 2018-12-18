@@ -7,12 +7,24 @@ using System.Collections.ObjectModel;
 
 namespace CSharpPFOefenmap
 {
+    [Serializable]
     public class Tweets
     {
-        public List<Tweet> Berichten { get; }
+        private List<Tweet> berichtenValue;
+
+        public ReadOnlyCollection<Tweet> Berichten
+        {
+            get
+            {
+                return new ReadOnlyCollection<Tweet>(berichtenValue);
+            }
+        }
+
         public void AddTweet(Tweet tweet)
         {
-            Berichten.Add(tweet);
+            if (berichtenValue == null)
+                berichtenValue = new List<Tweet>();
+            this.berichtenValue.Add(tweet);
         }
     }
 }

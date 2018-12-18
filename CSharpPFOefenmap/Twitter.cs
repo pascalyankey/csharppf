@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +12,36 @@ namespace CSharpPFOefenmap
 {
     public class Twitter
     {
-        readonly string bestandsnaam = @"C:\Data\twitter.obj";
-        public void PostTweet(Tweet tweet)
-        {
-            Tweets tweets = new Tweets();
-            tweets.Berichten.Add(tweet);
+        public string bestandsnaam = @"C:\Data\twitter.obj";
 
+        public void PostBericht(Tweet tweet)
+        {
+            var alleTweets = new Tweets();
             try
             {
-                using (var bestand = File.Open(bestandsnaam, FileMode.OpenOrCreate))
+                if (File.Exists(bestandsnaam))
                 {
-                    BinaryFormatter schrijver = new BinaryFormatter();
-                    schrijver.Serialize(bestand, tweet);
-
-                    Console.WriteLine(tweet.ToString());
+                    using (var bestand = File.Open(bestandsnaam, FileMode.Open, FileAccess.Read))
+                    {
+                        var lezer = new BinaryFormatter();
+                        var bestaandLijst = (Tweets)lezer.Deserialize(bestand);
+                        foreach (var item in bestaandLijst.Berichten)
+                            alleTweets.AddTweet(item);
+                        alleTweets.AddTweet(tweet);
+                    }
+                    using (var bestand = File.Open(bestandsnaam, FileMode.OpenOrCreate))
+                    {
+                        var schrijver = new BinaryFormatter();
+                        schrijver.Serialize(bestand, alleTweets);
+                    }
+                } else
+                {
+                    using (var bestand = File.Open(bestandsnaam, FileMode.OpenOrCreate))
+                    {
+                        var schrijver = new BinaryFormatter();
+                        alleTweets.AddTweet(tweet);
+                        schrijver.Serialize(bestand, alleTweets);
+                    }
                 }
             }
             catch (IOException)
@@ -41,17 +58,40 @@ namespace CSharpPFOefenmap
             }
         }
         
-        public void ShowTweets()
+        public void ToonBerichten()
         {
+            var vandaag = DateTime.Now;
             try
             {
-                using (var bestand = File.Open(bestandsnaam, FileMode.Open, FileAccess.Read))
+                if (File.Exists(bestandsnaam))
                 {
-                    var lezer = new BinaryFormatter();
-                    var tweets = (List<Tweet>)lezer.Deserialize(bestand);
-                    foreach (var tweet in tweets)
+                    using (var bestand = File.Open(bestandsnaam, FileMode.Open, FileAccess.Read))
                     {
-                        Console.WriteLine(tweet.ToString());
+                        var lezer = new BinaryFormatter();
+                        var tweets = (Tweets)lezer.Deserialize(bestand);
+                        var recent = from recentbericht in tweets.Berichten orderby recentbericht.Tijdstip descending select recentbericht;
+                        foreach (var tweet in recent)
+                        {
+                            if (tweet.Tijdstip.Date == vandaag.Date)
+                            {
+                                if (vandaag.Hour > tweet.Tijdstip.Hour)
+                                {
+                                    Console.WriteLine($"{tweet.Naam}: {tweet.Bericht} - {vandaag.Hour - tweet.Tijdstip.Hour} uren geleden");
+                                }
+                                else if (vandaag.Hour == tweet.Tijdstip.Hour)
+                                {
+                                    Console.WriteLine($"{tweet.Naam}: {tweet.Bericht} - {vandaag.Minute - tweet.Tijdstip.Minute} minuten geleden");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{tweet.Naam}: {tweet.Bericht} - {tweet.Tijdstip.TimeOfDay.ToString("hh\\:mm")}");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{tweet.Naam}: {tweet.Bericht} - {tweet.Tijdstip.Date.ToString("dd-MM-yyyy")}");
+                            }
+                        }
                     }
                 }
             }
@@ -69,9 +109,55 @@ namespace CSharpPFOefenmap
             }
         }
 
-        public void ShowTweets(string naam)
+        public void ToonBerichten(string naam)
         {
-
+            var vandaag = DateTime.Now;
+            try
+            {
+                if (File.Exists(bestandsnaam))
+                {
+                    using (var bestand = File.Open(bestandsnaam, FileMode.Open, FileAccess.Read))
+                    {
+                        var lezer = new BinaryFormatter();
+                        var tweets = (Tweets)lezer.Deserialize(bestand);
+                        var recentPersoon = from recentbericht in tweets.Berichten where recentbericht.Naam == naam orderby recentbericht.Tijdstip descending select recentbericht;
+                        foreach (var tweet in recentPersoon)
+                        {
+                            if (tweet.Tijdstip.Date == vandaag.Date)
+                            {
+                                if (vandaag.Hour > tweet.Tijdstip.Hour)
+                                {
+                                    Console.WriteLine($"{tweet.Naam}: {tweet.Bericht} - {vandaag.Hour - tweet.Tijdstip.Hour} uren geleden");
+                                }
+                                else if (vandaag.Hour == tweet.Tijdstip.Hour)
+                                {
+                                    Console.WriteLine($"{tweet.Naam}: {tweet.Bericht} - {vandaag.Minute - tweet.Tijdstip.Minute} minuten geleden");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{tweet.Naam}: {tweet.Bericht} - {tweet.Tijdstip.TimeOfDay.ToString("hh\\:mm")}");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{tweet.Naam}: {tweet.Bericht} - {tweet.Tijdstip.Date.ToString("dd-MM-yyyy")}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (IOException)
+            {
+                throw new Exception("Fout bij het lezen van het bestand!");
+            }
+            catch (SerializationException)
+            {
+                Console.WriteLine("Fout bij het serialiseren/deserialiseren");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
