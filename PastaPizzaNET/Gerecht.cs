@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PastaPizzaNET
+﻿namespace PastaPizzaNET
 {
-    public abstract class Gerecht : IBedrag
+    public abstract partial class Gerecht : IBedrag
     {
+        public Gerecht(string naam, float prijs)
+        {
+            Naam = naam;
+            Prijs = prijs;
+        }
         public string Naam { get; set; }
         public float Prijs { get; set; }
 
-        public float BerekenBedrag()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract float BerekenBedrag();
     }
 }

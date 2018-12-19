@@ -1,13 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PastaPizzaNET
 {
     public class Warmedrank : Drank
     {
+        public Warmedrank(Dranken naam, float prijs):base(naam, prijs)
+        {
 
+        }
+        public override float BerekenBedrag()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return Naam + " <" + Prijs + " euro>";
+        }
     }
 }
