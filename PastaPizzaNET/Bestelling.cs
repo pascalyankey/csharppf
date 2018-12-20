@@ -85,7 +85,7 @@ namespace PastaPizzaNET
             if (Dessert != null)
                 totaalPrijs += Dessert.Prijs;
             if (Gerecht != null && Drank != null && Dessert != null)
-                return totaalPrijs * Aantal * Korting;
+                return totaalPrijs * Aantal - (totaalPrijs * Aantal * Korting);
             else
                 return totaalPrijs * Aantal;
         }
