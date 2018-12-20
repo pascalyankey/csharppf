@@ -4,6 +4,11 @@ namespace PastaPizzaNET
 {
     public class Dessert : IBedrag
     {
+        public Dessert(string naam, int prijs)
+        {
+            Naam = naam;
+            Prijs = prijs;
+        }
         public enum Desserten
         {
             Tiramisu = 3,
@@ -11,8 +16,8 @@ namespace PastaPizzaNET
             Cake = 2
         }
 
-        private Desserten naamValue;
-        public Desserten Naam
+        private string naamValue;
+        public string Naam
         {
             get
             {
@@ -35,18 +40,18 @@ namespace PastaPizzaNET
             }
             set
             {
-                prijsValue = (int)Naam;
+                prijsValue = (int)Enum.Parse(typeof(Desserten), Naam);
             }
         }
 
         public float BerekenBedrag()
         {
-            throw new NotImplementedException();
+            return Prijs;
         }
 
         public override string ToString()
         {
-            return Naam + " <" + Prijs + " euro>";
+            return Naam + " <" + BerekenBedrag() + " euro>";
         }
     }
 }

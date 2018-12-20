@@ -4,18 +4,18 @@ namespace PastaPizzaNET
 {
     public class Warmedrank : Drank
     {
-        public Warmedrank(Dranken naam, float prijs):base(naam, prijs)
+        public Warmedrank(string naam, float prijs):base(naam, prijs)
         {
 
         }
         public override float BerekenBedrag()
         {
-            throw new NotImplementedException();
+            return Prijs;
         }
 
         public override string ToString()
         {
-            return Naam + " <" + Prijs + " euro>";
+            return Naam + " <" + BerekenBedrag() + " euro>";
         }
     }
 }

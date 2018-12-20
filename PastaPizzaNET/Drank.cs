@@ -13,14 +13,14 @@ namespace PastaPizzaNET
             Thee = 250
         }
 
-        public Drank(Dranken naam, float prijs)
+        public Drank(string naam, float prijs)
         {
             Naam = naam;
             Prijs = prijs;
         }
 
-        private Dranken naamValue;
-        public Dranken Naam
+        private string naamValue;
+        public string Naam
         {
             get
             {
@@ -43,7 +43,7 @@ namespace PastaPizzaNET
             }
             set
             {
-                prijsValue = (float)Naam / 100;
+                prijsValue = (int)Enum.Parse(typeof(Dranken), Naam)/100;
             }
         }
 

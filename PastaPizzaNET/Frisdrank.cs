@@ -4,19 +4,19 @@ namespace PastaPizzaNET
 {
     public class Frisdrank : Drank
     {
-        public Frisdrank(Dranken naam, float prijs) : base(naam, prijs)
+        public Frisdrank(string naam, float prijs) : base(naam, prijs)
         {
 
         }
 
         public override float BerekenBedrag()
         {
-            throw new NotImplementedException();
+            return Prijs;
         }
 
         public override string ToString()
         {
-            return Naam + " <" + Prijs + " euro>";
+            return Naam + " <" + BerekenBedrag() + " euro>";
         }
     }
 }
