@@ -24,7 +24,7 @@ namespace PastaPizzaNET
 
             totaalPrijs += (int)Enum.Parse(typeof(BesteldGerecht.Grootte), Grootte);
 
-            if (Extra.Count >= 1)
+            if (Extra != null)
             {
                 foreach (var item in Extra)
                 {
@@ -65,7 +65,7 @@ namespace PastaPizzaNET
 
         public string ShowExtra()
         {
-            if (Extra.Count >= 1)
+            if (Extra != null)
             {
                 var teller = 0;
                 var extraBuilder = new StringBuilder();
@@ -84,6 +84,11 @@ namespace PastaPizzaNET
             {
                 return "";
             }
+        }
+
+        public override string objectToString()
+        {
+            return "";
         }
     }
 }

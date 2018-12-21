@@ -16,6 +16,11 @@ namespace PastaPizzaNET
             Omschrijving = omschrijving;
         }
 
+        public Pasta(string naam, float prijs, string grootte, List<string> extra) : base(naam, prijs, grootte, extra)
+        {
+
+        }
+
         public string Omschrijving { get; set; }
 
         public override float BerekenBedrag()
@@ -24,7 +29,7 @@ namespace PastaPizzaNET
 
             totaalPrijs += (int)Enum.Parse(typeof(BesteldGerecht.Grootte), Grootte);
 
-            if (Extra.Count >= 1)
+            if (Extra != null)
             {
                 foreach (var item in Extra)
                 {
@@ -44,7 +49,7 @@ namespace PastaPizzaNET
 
         public string ShowExtra()
         {
-            if (Extra.Count >= 1)
+            if (Extra != null)
             {
                 var teller = 0;
                 var extraBuilder = new StringBuilder();
@@ -63,6 +68,11 @@ namespace PastaPizzaNET
             {
                 return "";
             }
+        }
+
+        public override string objectToString()
+        {
+            return "";
         }
     }
 }

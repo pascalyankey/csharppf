@@ -2,7 +2,7 @@
 {
     public class Klant
     {
-        public Klant(int id, string naam = "Onbekende klant")
+        public Klant(int id = 0, string naam = "Onbekende klant")
         {
             KlantID = id;
             Naam = naam;
@@ -13,6 +13,11 @@
         public override string ToString()
         {
             return Naam;
+        }
+
+        public string objectToString(Klant klant)
+        {
+            return klant.KlantID + "#" + klant.Naam;
         }
     }
 }

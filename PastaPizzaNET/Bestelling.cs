@@ -68,9 +68,12 @@ namespace PastaPizzaNET
         {
             var totaalPrijs = 0f;
 
-            totaalPrijs += (int)Enum.Parse(typeof(BesteldGerecht.Grootte), Gerecht.Grootte);
+            if (Gerecht != null && Gerecht.Grootte != null)
+            {
+                totaalPrijs += (int)Enum.Parse(typeof(BesteldGerecht.Grootte), Gerecht.Grootte);
+            }
 
-            if (Gerecht.Extra.Count >= 1)
+            if (Gerecht != null && Gerecht.Extra != null)
             {
                 foreach (var item in Gerecht.Extra)
                 {
@@ -97,7 +100,6 @@ namespace PastaPizzaNET
 
         public void ToonDetails()
         {
-            Console.WriteLine($"Bestelling {BestelNr}:");
             Console.WriteLine($"Klant: {Klant.ToString()}");
             if (Gerecht != null)
                 Console.WriteLine($"Gerecht: {Gerecht.ToString()}");
@@ -107,6 +109,12 @@ namespace PastaPizzaNET
                 Console.WriteLine($"Dessert: {Dessert.ToString()}");
             Console.WriteLine($"Aantal: {Aantal}");
             Console.WriteLine(ToString());
+            Console.WriteLine();
+        }
+
+        public string objectToString(Bestelling bestelling)
+        {
+            return "";
         }
     }
 }

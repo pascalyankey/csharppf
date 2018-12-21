@@ -4,7 +4,7 @@ namespace PastaPizzaNET
 {
     public class Dessert : IBedrag
     {
-        public Dessert(string naam, int prijs)
+        public Dessert(string naam, float prijs)
         {
             Naam = naam;
             Prijs = prijs;
@@ -31,8 +31,8 @@ namespace PastaPizzaNET
                     throw new Exception("Opgegeven dessert staat niet in de lijst!");
             }
         }
-        private int prijsValue;
-        public int Prijs
+        private float prijsValue;
+        public float Prijs
         {
             get
             {
@@ -40,7 +40,7 @@ namespace PastaPizzaNET
             }
             set
             {
-                prijsValue = (int)Enum.Parse(typeof(Desserten), Naam);
+                prijsValue = (float)(int)Enum.Parse(typeof(Desserten), Naam);
             }
         }
 

@@ -8,7 +8,7 @@ namespace PastaPizzaNET
         {
             Water = 200,
             Limonade = 200,
-            Cocacola = 200,
+            CocaCola = 200,
             Koffie = 250,
             Thee = 250
         }
@@ -43,7 +43,7 @@ namespace PastaPizzaNET
             }
             set
             {
-                prijsValue = (int)Enum.Parse(typeof(Dranken), Naam)/100;
+                prijsValue = (float)(int)Enum.Parse(typeof(Dranken), Naam)/100;
             }
         }
 

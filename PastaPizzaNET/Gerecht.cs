@@ -35,7 +35,7 @@ namespace PastaPizzaNET
                     grootteValue = value;
                 }
                 else
-                    throw new Exception("Opgegeven dessert staat niet in de lijst!");
+                    throw new Exception("Opgegeven extra staat niet in de lijst!");
             }
         }
         private List<string> extraValue;
@@ -56,11 +56,12 @@ namespace PastaPizzaNET
                         extraValue.Add(item.ToString());
                     }
                     else
-                        throw new Exception("Opgegeven dessert staat niet in de lijst!");
+                        throw new Exception("Opgegeven extra staat niet in de lijst!");
                 }
             }
         }
 
         public abstract float BerekenBedrag();
+        public abstract string objectToString();
     }
 }
