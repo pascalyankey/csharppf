@@ -15,9 +15,9 @@
             return Naam;
         }
 
-        public string objectToString(Klant klant)
+        public string ObjectToString()
         {
-            return klant.KlantID + "#" + klant.Naam;
+            return KlantID + "#" + Naam;
         }
     }
 }

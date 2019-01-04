@@ -58,9 +58,9 @@ namespace PastaPizzaNET
                 {
                     teller++;
                     if (teller == Extra.Count)
-                        extraBuilder.Append(Enum.Parse(typeof(BesteldGerecht.Extra), item));
+                        extraBuilder.Append(item);
                     else
-                        extraBuilder.Append(Enum.Parse(typeof(BesteldGerecht.Extra), item) + " ");
+                        extraBuilder.Append(item + " ");
                 }
                 return extraBuilder.ToString();
             }
@@ -70,9 +70,9 @@ namespace PastaPizzaNET
             }
         }
 
-        public override string objectToString()
+        public override string ObjectToString()
         {
-            return "";
+            return "pasta" + "#" + Naam + "#" + Prijs + "#" + Omschrijving;
         }
     }
 }

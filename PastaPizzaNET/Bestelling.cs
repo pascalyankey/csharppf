@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace PastaPizzaNET
 {
@@ -112,9 +114,59 @@ namespace PastaPizzaNET
             Console.WriteLine();
         }
 
-        public string objectToString(Bestelling bestelling)
+        public string ShowGerecht()
         {
-            return "";
+            if (Gerecht != null)
+            {
+                var extraBuilder = new StringBuilder();
+                extraBuilder.Append(Gerecht.Naam + "-" + Gerecht.Grootte + "-");
+                if (Gerecht.Extra != null)
+                    extraBuilder.Append(Gerecht.Extra.Count + "-");
+                else
+                    extraBuilder.Append(0 + "-");
+                if (Gerecht.Extra != null)
+                {
+                    var teller = 0;
+                    foreach (var item in Gerecht.Extra)
+                    {
+                        teller++;
+                        if (teller == Gerecht.Extra.Count)
+                            extraBuilder.Append(item);
+                        else
+                            extraBuilder.Append(item + "-");
+                    }
+                }
+                return extraBuilder.ToString();
+            }
+            else
+                return "";
+        }
+
+
+        public string ShowDrank()
+        {
+            if (Drank != null)
+            {
+                if (Drank.GetType() == typeof(Frisdrank))
+                    return "F" + "-" + Drank.Naam;
+                else
+                    return "W" + "-" + Drank.Naam;
+            }
+            else
+                return "";
+        }
+
+        public string ShowDessert()
+        {
+            if (Dessert != null)
+                return Dessert.Naam;
+            else
+                return "";
+        }
+
+        public string ObjectToString()
+        {
+            return Klant.KlantID + "#" + ShowGerecht() + "#" + ShowDrank() + "#" + ShowDessert() + "#" + Aantal;
         }
     }
 }

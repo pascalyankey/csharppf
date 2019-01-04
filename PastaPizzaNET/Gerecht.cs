@@ -62,6 +62,6 @@ namespace PastaPizzaNET
         }
 
         public abstract float BerekenBedrag();
-        public abstract string objectToString();
+        public abstract string ObjectToString();
     }
 }

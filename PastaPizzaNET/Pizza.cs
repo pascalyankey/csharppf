@@ -63,6 +63,23 @@ namespace PastaPizzaNET
             }
         }
 
+        public string ShowOnderdelen(List<string> onderdelen)
+        {
+            if (onderdelen.Count >= 1)
+            {
+                var pizzaBuilder = new StringBuilder();
+                foreach (var item in onderdelen)
+                {
+                    pizzaBuilder.Append("#" + item);
+                }
+                return pizzaBuilder.ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+
         public string ShowExtra()
         {
             if (Extra != null)
@@ -86,9 +103,10 @@ namespace PastaPizzaNET
             }
         }
 
-        public override string objectToString()
+
+        public override string ObjectToString()
         {
-            return "";
+            return "pizza" + "#" + Naam + "#" + Prijs + ShowOnderdelen(Onderdelen);
         }
     }
 }

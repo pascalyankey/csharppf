@@ -34,7 +34,7 @@ namespace PastaPizzaNET
             bestellingen.Add(bestelling3);
             //bestelling3.ToonDetails();
 
-            var gerecht4 = new Pasta("Lasagne", 15, "Klein", new List<string> { "Brood" });
+            var gerecht4 = new Pasta("Lasagne", 15, "Klein", new List<string> { "Look" });
             var bestelling4 = new Bestelling(4, klant3, gerecht4, 1);
             bestellingen.Add(bestelling4);
             //bestelling4.ToonDetails();
@@ -99,7 +99,14 @@ namespace PastaPizzaNET
                 }
             }
 
-
+            Console.WriteLine(bestelling1.ObjectToString());
+            Console.WriteLine(bestelling2.ObjectToString());
+            Console.WriteLine(bestelling3.ObjectToString());
+            Console.WriteLine(bestelling4.ObjectToString());
+            Console.WriteLine(bestelling5.ObjectToString());
+            Console.WriteLine(bestelling6.ObjectToString());
+            Console.WriteLine(bestelling7.ObjectToString());
+            Console.WriteLine(bestelling8.ObjectToString());
         }
     }
 }
