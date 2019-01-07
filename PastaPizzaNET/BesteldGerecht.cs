@@ -2,19 +2,22 @@
 
 namespace PastaPizzaNET
 {
-    public class BesteldGerecht
+    public abstract partial class Gerecht
     {
-        public enum Grootte
+        public class BesteldGerecht
         {
-            Klein = 0,
-            Groot = 3
-        }
+            public enum Grootte
+            {
+                Klein = 0,
+                Groot = 3
+            }
 
-        public enum Extra
-        {
-            Brood = 1,
-            Kaas = 1,
-            Look = 1
+            public enum Extra
+            {
+                Brood = 1,
+                Kaas = 1,
+                Look = 1
+            }
         }
     }
 }

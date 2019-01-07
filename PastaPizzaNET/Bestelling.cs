@@ -72,14 +72,14 @@ namespace PastaPizzaNET
 
             if (Gerecht != null && Gerecht.Grootte != null)
             {
-                totaalPrijs += (int)Enum.Parse(typeof(BesteldGerecht.Grootte), Gerecht.Grootte);
+                totaalPrijs += (int)Enum.Parse(typeof(Gerecht.BesteldGerecht.Grootte), Gerecht.Grootte);
             }
 
             if (Gerecht != null && Gerecht.Extra != null)
             {
                 foreach (var item in Gerecht.Extra)
                 {
-                    totaalPrijs += (int)Enum.Parse(typeof(BesteldGerecht.Extra), item);
+                    totaalPrijs += (int)Enum.Parse(typeof(Gerecht.BesteldGerecht.Extra), item);
                 }
             }
 
