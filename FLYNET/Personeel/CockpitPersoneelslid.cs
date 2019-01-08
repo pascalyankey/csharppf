@@ -13,6 +13,7 @@ namespace FLYNET.Personeel
         }
         public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, List<Certificaat> certificaten) : base(personeelsid, naam, basiskostprijsperdag, graad, certificaten)
         {
+
         }
         public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, int vlieguren) : base(personeelsid, naam, basiskostprijsperdag, graad)
         {

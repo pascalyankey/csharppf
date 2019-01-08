@@ -149,7 +149,7 @@ namespace FLYNET
                     else
                         Console.WriteLine("CabinePersoneel:");
                     Console.WriteLine("---------------------------------");
-
+ 
                     Console.WriteLine($"PersoneelsID = {personeel.PersoneelsID}");
                     Console.WriteLine($"Naam = {personeel.Naam}");
                     Console.WriteLine($"BasiskostprijsPerDag = {personeel.BasisKostprijsPerDag}");
@@ -157,9 +157,14 @@ namespace FLYNET
                     foreach (var cert in personeel.Certificaten)
                         Console.WriteLine($"\t{cert.CertificaatOmschrijving} ({cert.CertificaatAfkorting})");
                     if (personeel is CockpitPersoneelslid)
-                        Console.WriteLine($"Vlieguren = {personeel}");
-                    else
-                        Console.WriteLine($"Werkpositie = {personeel}");
+                    {
+                        var cockpit = (CockpitPersoneelslid)personeel;
+                        Console.WriteLine($"Vlieguren = {cockpit.VliegUren}");
+                    }
+                    else {
+                        var cabine = (CabinePersoneelslid)personeel;
+                        Console.WriteLine($"Werkpositie = {cabine.Werkpositie}");
+                    }
                     Console.WriteLine($"Graad = {personeel.Graad}");
                     Console.WriteLine($"TotaleKostprijsPerDag = {personeel.BerekenTotaleKostprijsPerDag()}");
                     Console.WriteLine();
