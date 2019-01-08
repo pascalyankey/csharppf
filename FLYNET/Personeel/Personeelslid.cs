@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FLYNET.Personeel
+﻿namespace FLYNET.Personeel
 {
     public abstract class Personeelslid : IKost
     {
@@ -16,8 +10,8 @@ namespace FLYNET.Personeel
         }
 
         public decimal BasisKostprijsPerDag { get; set; }
-        string PersoneelsID { get; set; }
-        string Naam { get; set; }
+        public string PersoneelsID { get; set; }
+        public string Naam { get; set; }
 
         public abstract decimal BerekenTotaleKostprijsPerDag();
     }

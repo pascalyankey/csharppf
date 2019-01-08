@@ -56,7 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vloot\VliegMaatschappij.cs" />
     <Compile Include="Vloot\Vliegtuig.cs" />
-    <Compile Include="Vlucht.cs" />
+    <Compile Include="Vloot\Vlucht.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

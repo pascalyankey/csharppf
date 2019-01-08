@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Graad = FLYNET.Enums.Graad;
 using CockpitPersoneel = FLYNET.Enums.CockpitBemanningslid;
 
@@ -10,18 +7,18 @@ namespace FLYNET.Personeel
 {
     public class CockpitPersoneelslid : VliegendPersoneelslid
     {
-        public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, List<string> certificaten, int vlieguren):base(personeelsid, naam, basiskostprijsperdag, graad, certificaten)
+        public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, List<Certificaat> certificaten, int vlieguren):base(personeelsid, naam, basiskostprijsperdag, graad, certificaten)
         {
             VliegUren = vlieguren;
         }
-        public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, List<string> certificaten) : base(personeelsid, naam, basiskostprijsperdag, graad, certificaten)
+        public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, List<Certificaat> certificaten) : base(personeelsid, naam, basiskostprijsperdag, graad, certificaten)
         {
         }
         public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, int vlieguren) : base(personeelsid, naam, basiskostprijsperdag, graad)
         {
             VliegUren = vlieguren;
         }
-        public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, List<string> certificaten, int vlieguren) : base(personeelsid, naam, basiskostprijsperdag, certificaten)
+        public CockpitPersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, List<Certificaat> certificaten, int vlieguren) : base(personeelsid, naam, basiskostprijsperdag, certificaten)
         {
             VliegUren = vlieguren;
         }
@@ -45,7 +42,7 @@ namespace FLYNET.Personeel
             }
             set
             {
-                if (Enum.IsDefined(typeof(CockpitPersoneel), value))
+                if (Enum.IsDefined(typeof(CockpitPersoneel), (CockpitPersoneel)value))
                     graadValue = value;
                 else
                     throw new GraadException(value, "behoort niet tot de mogelijke graden van een CockpitPersoneelslid");
@@ -70,7 +67,7 @@ namespace FLYNET.Personeel
             {
                 foreach (var item in Certificaten)
                 {
-                    if (item == "CPL")
+                    if (item.CertificaatAfkorting == "CPL")
                         totaal += 50;
                 }
             }

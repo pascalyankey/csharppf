@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Afdeling = FLYNET.Enums.Afdeling;
+﻿using Afdeling = FLYNET.Enums.Afdeling;
 
 namespace FLYNET.Personeel
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FLYNET
+﻿namespace FLYNET
 {
     public class Enums
     {
@@ -44,8 +38,8 @@ namespace FLYNET
 
         public enum CabineBemanningslid
         {
-            Purser,
-            Steward
+            Steward = 4,
+            Purser = 5
         }
     }
 }

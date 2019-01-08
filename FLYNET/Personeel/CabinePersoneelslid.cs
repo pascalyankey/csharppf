@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Graad = FLYNET.Enums.Graad;
 using CabinePersoneel = FLYNET.Enums.CabineBemanningslid;
 
@@ -10,12 +7,33 @@ namespace FLYNET.Personeel
 {
     public class CabinePersoneelslid : VliegendPersoneelslid
     {
-        public CabinePersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag):base(personeelsid, naam, basiskostprijsperdag)
+        public CabinePersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, List<Certificaat> certificaten, string werkpositie) : base(personeelsid, naam, basiskostprijsperdag, graad, certificaten)
+        {
+            Werkpositie = werkpositie;
+        }
+        public CabinePersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, List<Certificaat> certificaten) : base(personeelsid, naam, basiskostprijsperdag, graad, certificaten)
+        {
+
+        }
+        public CabinePersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, Graad graad, string werkpositie) : base(personeelsid, naam, basiskostprijsperdag, graad)
+        {
+            Werkpositie = werkpositie;
+        }
+        public CabinePersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, List<Certificaat> certificaten, string werkpositie) : base(personeelsid, naam, basiskostprijsperdag, certificaten)
+        {
+            Werkpositie = werkpositie;
+        }
+        public CabinePersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag, string werkpositie) : base(personeelsid, naam, basiskostprijsperdag)
+        {
+            Werkpositie = werkpositie;
+        }
+        public CabinePersoneelslid(string personeelsid, string naam, decimal basiskostprijsperdag) : base(personeelsid, naam, basiskostprijsperdag)
         {
 
         }
 
         public string Werkpositie { get; set; }
+
         private Graad graadValue;
         public override Graad Graad
         {
@@ -25,7 +43,7 @@ namespace FLYNET.Personeel
             }
             set
             {
-                if (Enum.IsDefined(typeof(CabinePersoneel), value))
+                if (Enum.IsDefined(typeof(CabinePersoneel), (CabinePersoneel)value))
                     graadValue = value;
                 else
                     throw new GraadException(value, "behoort niet tot de mogelijke graden van een CabinePersoneelslid");
@@ -46,7 +64,7 @@ namespace FLYNET.Personeel
             {
                 foreach (var item in Certificaten)
                 {
-                    if (item == "EHBO")
+                    if (item.CertificaatAfkorting == "EHBO")
                         totaal += 5;
                 }
             }
